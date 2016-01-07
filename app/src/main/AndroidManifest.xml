@@ -6,15 +6,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name="goncalves.com.readinglist.Application.ReadingList"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Activities.BookListActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.BookAddActivity"
+            android:label="@string/title_activity_book_add" >
         </activity>
 
         <meta-data
@@ -22,20 +27,32 @@
             android:value="reading_list.db" />
         <meta-data
             android:name="VERSION"
-            android:value="1" />
+            android:value="3" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.rafagonc.readinglist" />
+            android:value="goncalves.com.readinglist.Entities.Concrete" />
         <meta-data
             android:name="roboguice.modules"
-            android:value="goncalves.com.readinglist.Module.DAODependencyInjection,goncalves.com.readinglist.Module.FactoryDepedencyInjection" />
+            android:value="goncalves.com.readinglist.Modules.DAODependencyInjection,goncalves.com.readinglist.Modules.FactoryDepedencyInjection" />
 
         <activity
-            android:name=".Activities.BookAddActivity"
-            android:label="@string/title_activity_book_add" >
+            android:name=".Activities.CategoryChooseActivity"
+            android:label="@string/title_activity_category_choose" >
+        </activity>
+        <activity
+            android:name=".Activities.AuthorChooseActivity"
+            android:label="@string/title_activity_author_choose" >
+        </activity>
+        <activity
+            android:name=".Activities.AuthorAddActivity"
+            android:label="@string/title_activity_author_add" >
+        </activity>
+        <activity
+            android:name=".Activities.CoverSearchActivity"
+            android:label="@string/title_activity_cover_search" >
         </activity>
     </application>
 

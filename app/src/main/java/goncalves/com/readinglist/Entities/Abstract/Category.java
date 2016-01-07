@@ -1,10 +1,10 @@
-package goncalves.com.readinglist.Models.Abstract;
+package goncalves.com.readinglist.Entities.Abstract;
 import java.util.List;
 
 /**
  * Created by rafagonc on 1/5/16.
  */
-public interface Author {
+public interface Category {
 
     //region Properties
     public String getName();

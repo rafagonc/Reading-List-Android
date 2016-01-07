@@ -6,5 +6,18 @@
     <string name="action_add">Add</string>
     <string name="book_name">Book Name</string>
     <string name="author_name">Author</string>
+    <string name="category_name">Category</string>
+    <string name="pages_name">Pages</string>
     <string name="title_activity_book_add">BookAddActivity</string>
+    <string name="progess_name">Progress</string>
+    <string name="create_button_name">Save</string>
+    <string name="cover_name">cover</string>
+    <string name="invalid_book_exception">You need to set a book name!</string>
+    <string name="invalid_author_exception">You need to choose an author!</string>
+    <string name="invalid_category_exception">You need to choose a category!</string>
+    <string name="invalid_cover">You need to set the book name at least.</string>
+    <string name="title_activity_category_choose">CategoryChooseActivity</string>
+    <string name="title_activity_author_choose">AuthorChooseActivity</string>
+    <string name="title_activity_author_add">AuthorAddActivity</string>
+    <string name="title_activity_cover_search">CoverSearchActivity</string>
 </resources>

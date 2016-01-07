@@ -1,15 +1,22 @@
-package goncalves.com.readinglist.Models.Concrete;
+package goncalves.com.readinglist.Entities.Concrete;
+
+import android.graphics.drawable.Drawable;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
-import goncalves.com.readinglist.Models.Abstract.Book;
+
+import java.io.Serializable;
+
+import goncalves.com.readinglist.Entities.Abstract.Author;
+import goncalves.com.readinglist.Entities.Abstract.Book;
+import goncalves.com.readinglist.Entities.Abstract.Category;
 
 /**
  * Created by rafagonc on 1/4/16.
  */
 
 @Table
-public class BookImpl extends SugarRecord implements Book {
+public class BookImpl extends SugarRecord implements Book, Serializable {
 
     //region Properties
     private Long id;
@@ -18,14 +25,12 @@ public class BookImpl extends SugarRecord implements Book {
     private Integer pagesRead;
     private AuthorImpl author;
     private CategoryImpl category;
+    private Drawable drawable;
     //endregion
 
     //region Constructors
     public BookImpl() {
 
-    }
-    public BookImpl(String name) {
-        this.name = name;
     }
     //endregion
 
@@ -51,20 +56,27 @@ public class BookImpl extends SugarRecord implements Book {
     public AuthorImpl getAuthor() {
         return author;
     }
-    public void setAuthor(AuthorImpl author) {
-        this.author = author;
-    }
     public CategoryImpl getCategory() {
         return category;
     }
-    public void setCategory(CategoryImpl category) {
-        this.category = category;
+    public void setAuthor(Author author) {
+        this.author = (AuthorImpl)author;
+    }
+    public void setCategory(Category category) {
+        this.category = (CategoryImpl)category;
+    }
+    public Drawable getCoverImage() {
+        return drawable;
+    }
+    public void setCoverImage(Drawable drawable) {
+        this.drawable = drawable;
     }
     //endregion
 
     //region Methods
-    public void saveBook() {
+       public void saveBook() {
         if (this.author != null) this.author.save();
+        if (this.category != null) this.category.save();
         this.save();
         super.save();
     }

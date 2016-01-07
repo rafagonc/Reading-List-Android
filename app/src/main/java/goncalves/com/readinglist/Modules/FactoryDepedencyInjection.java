@@ -11,10 +11,11 @@ import goncalves.com.readinglist.Factories.Concrete.CategoryFactoryImpl;
 /**
  * Created by rafagonc on 1/5/16.
  */
-public abstract class FactoryDepedencyInjection extends AbstractModule {
+public class FactoryDepedencyInjection extends AbstractModule {
 
     //region Injections
-    public void bind() {
+    @Override
+    protected void configure() {
         bind(BookFactory.class).to(BookFactoryImpl.class);
         bind(AuthorFactory.class).to(AuthorFactoryImpl.class);
         bind(CategoryFactory.class).to(CategoryFactoryImpl.class);

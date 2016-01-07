@@ -3,5 +3,8 @@ package goncalves.com.readinglist.DAOs.Abstract;
 /**
  * Created by rafagonc on 1/5/16.
  */
-public interface CategoryDataAccessObject {
+public interface CategoryDataAccessObject extends DataAccessObject {
+
+    public Boolean hasCreatedCategories();
+
 }
