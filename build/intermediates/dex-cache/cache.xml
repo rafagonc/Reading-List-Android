@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/rafagonc/Android/ReadingList/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/classes-377904134a3c465ca1c4dd49b76b02a651d9a63d.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/.gradle/caches/modules-2/files-2.1/org.roboguice/roboguice/3.0.1/24e814f35d5cc28eaa7e9f07a50ea69deeb2b544/roboguice-3.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="24e814f35d5cc28eaa7e9f07a50ea69deeb2b544">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/roboguice-3.0.1-8dfba1b54453f79f5327f5626f1aab5dc047366a.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-0a43f8de8badd1bbd3f9260edec9da6f90bd4f2d.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/Android/ReadingList/app/build/intermediates/exploded-aar/com.nispok/snackbar/2.11.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d0db114dc90b3e192ba48d22421a9c47cfc01f00">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/classes-507dd4379adddd6a93a43d6d582ff01701989b57.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/Android/ReadingList/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-b0cf0bf3eb79b5c1b20b949027d35891e90f6ae3.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/Android/ReadingList/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c6d79137693d494dee16372d3921f919eb724ced">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/classes-a232694ae4427504344c8a06a97531c9d4b3040c.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/Android/ReadingList/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/classes-1671c9ac8ec63c526f74d26b1eb9c2ded567685a.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/Android/ReadingList/app/build/intermediates/exploded-aar/com.github.satyan/sugar/1.4/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ac045b53684345f4ec8468477e8fc5034d0d2bfd">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/classes-19281af634cfe70549bdad39978b60d75629b1b7.jar" />
+    </item>
+    <item
+        jar="/Users/rafagonc/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="cce0823396aa693798f8882e64213b1772032b09">
+        <dex dex="/Users/rafagonc/Android/ReadingList/app/build/intermediates/pre-dexed/debug/guava-18.0-41781df66127cf227e678af4d4ffc567f3f738a6.jar" />
+    </item>
+
+</items>
