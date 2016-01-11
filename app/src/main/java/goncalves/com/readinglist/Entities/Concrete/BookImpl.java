@@ -71,6 +71,12 @@ public class BookImpl extends SugarRecord implements Book, Serializable {
     public void setCoverImage(Drawable drawable) {
         this.drawable = drawable;
     }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     //endregion
 
     //region Methods

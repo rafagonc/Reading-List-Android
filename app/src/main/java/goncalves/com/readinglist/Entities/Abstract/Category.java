@@ -8,6 +8,7 @@ public interface Category {
 
     //region Properties
     public String getName();
+    public Long getId();
     //endregion
 
     //region Relationships

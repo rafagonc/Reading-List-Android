@@ -39,7 +39,7 @@ public class CategoryNameEditText extends EditText implements BookAddChainOfResp
     //region Chain Of Responsibility
     @Override
     public void processBook(Book book) throws Exception {
-        if (this.category != null) {
+        if (this.category == null) {
             throw new InvalidCategoryException();
         }
         book.setCategory(category);

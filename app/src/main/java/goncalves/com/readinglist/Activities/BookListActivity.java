@@ -2,14 +2,15 @@ package goncalves.com.readinglist.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
+import javax.inject.Inject;
 
 import goncalves.com.readinglist.Customizers.ActionBarCustomizer;
+import goncalves.com.readinglist.DAOs.Abstract.BookDataAccessObject;
 import goncalves.com.readinglist.Entities.Abstract.Book;
-import goncalves.com.readinglist.Entities.Concrete.BookImpl;
 import goncalves.com.readinglist.R;
 import goncalves.com.readinglist.ViewAdapters.Concrete.BookListView;
 import goncalves.com.readinglist.ViewAdapters.Delegates.BookListViewDelegate;
@@ -23,19 +24,16 @@ public class BookListActivity extends RoboActionBarActivity implements BookListV
     @InjectView(R.id.bookListView) BookListView bookListView;
     //endregion
 
+    //region Properties
+    @Inject BookDataAccessObject bookDataAccessObject;
+    //endregion
+
     //region Lifecycle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
-        BookImpl book1 = new BookImpl();
-        book1.setName("Rafael");
-        BookImpl book2 = new BookImpl();
-        book2.setName("Gonçalves");
-        ArrayList<Book> books = new ArrayList<Book>();
-        books.add(book1);
-        books.add(book2);
-        this.bookListView.setBooks(books);
+        this.bookListView.setBooks(bookDataAccessObject.findAll());
         bookListView.setDelegate(this);
     }
     @Override
@@ -58,6 +56,8 @@ public class BookListActivity extends RoboActionBarActivity implements BookListV
     @Override
     public void wantsToOpenBookDetail(Book book) {
         Intent bookAddIntent = new Intent(this, BookAddActivity.class);
+        Log.i("ID", book.getId().toString());
+        bookAddIntent.putExtra(BookAddActivity.BOOK_DATA_ID, book.getId());
         startActivity(bookAddIntent);
     }
     //endregion

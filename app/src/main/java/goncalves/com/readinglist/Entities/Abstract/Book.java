@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 public interface Book {
 
     //region Getters and
+    public Long getId();
     public Drawable getCoverImage();
     public void setCoverImage(Drawable drawable);
     public String getName();

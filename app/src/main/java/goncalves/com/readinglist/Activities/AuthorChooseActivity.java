@@ -22,6 +22,7 @@ public class AuthorChooseActivity extends RoboActionBarActivity implements Autho
 
     //region Constants
     public static final String AUTHOR_DATA_ID = "AUTHOR_DATA_ID";
+    public static final Integer AUTHOR_RESULT = 1;
     //endregion
 
     //region UI Properties
@@ -69,10 +70,21 @@ public class AuthorChooseActivity extends RoboActionBarActivity implements Autho
     //region Delegates
     @Override
     public void wantsToSelectAuthor(Author author) {
-        getIntent().putExtra("Author", author.getId());
-        setResult(2, getIntent());
+        getIntent().putExtra(AUTHOR_DATA_ID, author.getId());
+        setResult(AUTHOR_RESULT, getIntent());
         finish();
+
     }
     //endregion
 
 }
+
+
+
+
+
+
+
+
+
+

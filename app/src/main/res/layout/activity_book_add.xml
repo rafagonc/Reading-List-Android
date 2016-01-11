@@ -55,6 +55,7 @@
             android:layout_marginRight="8dp"
             android:layout_alignParentBottom="true"
             android:hint="@string/author_name"
+            android:focusableInTouchMode="false"
             android:singleLine="true"
             />
 
@@ -67,7 +68,7 @@
     android:layout_below="@+id/add_book_main_layout"
     android:hint="@string/category_name"
     android:singleLine="true"
-     />
+        android:focusableInTouchMode="false" />
 
     <goncalves.com.readinglist.ViewAdapters.Concrete.PagesEditText
         android:layout_width="match_parent"
@@ -76,7 +77,8 @@
         android:layout_below="@+id/categoryEditTextView"
         android:hint="@string/pages_name"
         android:singleLine="true"
-        android:inputType="number" />
+        android:inputType="number"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,6 +114,20 @@
         android:background="@android:color/transparent"
         android:stateListAnimator="@null"
         android:onClick="onSaveClick"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="0"
+            android:id="@+id/progressTextView"
+            android:layout_toRightOf="@+id/saveButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBaseline="@+id/textView"
+            android:layout_above="@+id/progessSeekBar"
+            android:gravity="right"
+            android:maxLength="4" />
 
     </RelativeLayout>
 </ScrollView>

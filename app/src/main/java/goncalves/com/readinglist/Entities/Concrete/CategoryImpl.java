@@ -32,7 +32,6 @@ public class CategoryImpl extends SugarRecord implements Category, Serializable 
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
