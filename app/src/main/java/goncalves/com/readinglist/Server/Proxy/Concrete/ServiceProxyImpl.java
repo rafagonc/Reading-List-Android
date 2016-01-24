@@ -4,8 +4,9 @@ import com.google.inject.Inject;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
-import goncalves.com.readinglist.Factories.Abstract.ServiceCallFactory;
+import goncalves.com.readinglist.Factories.Server.Abstract.ServiceCallFactory;
 import goncalves.com.readinglist.Server.Calls.Abstract.ServiceCall;
 import goncalves.com.readinglist.Server.Proxy.Abstract.ServiceProxy;
 import goncalves.com.readinglist.Server.Requests.Abstract.ServiceRequest;
@@ -18,8 +19,12 @@ public class ServiceProxyImpl implements ServiceProxy {
 
     //region Properties
     @Inject ServiceCallFactory serviceCallFactory;
-    private HashMap<ServiceRequest, HashSet<ServiceResponse>> loading;
+    private Map<ServiceRequest, HashSet<ServiceResponse>> loading;
     //endregion
+
+    public ServiceProxyImpl() {
+        this.loading = new HashMap();
+    }
 
     //region Registering
     private void registerServiceCall(ServiceRequest request, ServiceResponse response) {
@@ -42,10 +47,9 @@ public class ServiceProxyImpl implements ServiceProxy {
     @Override
     public void callServiceWithRequest(final ServiceRequest request, final ServiceResponse response) {
         try {
-            registerServiceCall(request, response);
             if (loading.get(request) != null) return;
-            Class callClass = serviceCallFactory.callForRequest(request);
-            ServiceCall call = (ServiceCall)callClass.newInstance();
+            registerServiceCall(request, response);
+            ServiceCall call = serviceCallFactory.callForRequest(request);
             call.callServiceWithRequest(request, new ServiceResponse() {
                 public void onSuccess(Object data) {
                     for (ServiceResponse anonResponse : loading.get(request)) anonResponse.onSuccess(data);

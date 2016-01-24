@@ -25,7 +25,7 @@ public class BookListActivity extends RoboActionBarActivity implements BookListV
     //endregion
 
     //region Properties
-    @Inject BookDataAccessObject bookDataAccessObject;
+    @Inject BookDataAccessObject bookDataAccessObject;;
     //endregion
 
     //region Lifecycle
@@ -46,9 +46,15 @@ public class BookListActivity extends RoboActionBarActivity implements BookListV
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actions_add) {
             Intent addBookIntent = new Intent(this, BookAddActivity.class);
-            startActivity(addBookIntent);
+            startActivityForResult(addBookIntent, BookAddActivity.BOOK_RESULT);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        this.bookListView.setBooks(bookDataAccessObject.findAll());
     }
     //endregion
 
@@ -58,7 +64,7 @@ public class BookListActivity extends RoboActionBarActivity implements BookListV
         Intent bookAddIntent = new Intent(this, BookAddActivity.class);
         Log.i("ID", book.getId().toString());
         bookAddIntent.putExtra(BookAddActivity.BOOK_DATA_ID, book.getId());
-        startActivity(bookAddIntent);
+        startActivityForResult(bookAddIntent, BookAddActivity.BOOK_RESULT);
     }
     //endregion
 

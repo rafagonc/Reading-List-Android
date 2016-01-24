@@ -1,7 +1,5 @@
 package goncalves.com.readinglist.Server.Calls.Concrete;
 
-import com.android.volley.VolleyError;
-
 import goncalves.com.readinglist.Server.Calls.Abstract.ServiceCall;
 
 /**
@@ -15,7 +13,7 @@ public class RecommendedBooksCall extends ServiceCall {
     }
 
     @Override
-    public void onErrorResponse(VolleyError error) {
+    public void onError(Exception error) {
 
     }
 }

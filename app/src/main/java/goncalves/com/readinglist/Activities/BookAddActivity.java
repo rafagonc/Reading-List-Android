@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
+import com.orm.SugarRecord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,14 @@ import goncalves.com.readinglist.DAOs.Abstract.CategoryDataAccessObject;
 import goncalves.com.readinglist.Entities.Abstract.Author;
 import goncalves.com.readinglist.Entities.Abstract.Book;
 import goncalves.com.readinglist.Entities.Abstract.Category;
-import goncalves.com.readinglist.Factories.Abstract.BookFactory;
-import goncalves.com.readinglist.GeneralClasses.NotificationShower;
+import goncalves.com.readinglist.Factories.Entities.Abstract.BookFactory;
+import goncalves.com.readinglist.GeneralClasses.NotificationPreseter.Abstract.NotificationPresenter;
 import goncalves.com.readinglist.Interfaces.BookAddChainOfResponsibility;
 import goncalves.com.readinglist.R;
 import goncalves.com.readinglist.ViewAdapters.Concrete.AuthorNameEditText;
 import goncalves.com.readinglist.ViewAdapters.Concrete.BookNameEditText;
 import goncalves.com.readinglist.ViewAdapters.Concrete.CategoryNameEditText;
+import goncalves.com.readinglist.ViewAdapters.Concrete.CoverButton;
 import goncalves.com.readinglist.ViewAdapters.Concrete.PagesEditText;
 import goncalves.com.readinglist.ViewAdapters.Concrete.ProgessPagesSeekBar;
 import goncalves.com.readinglist.ViewAdapters.Delegates.AuthorNameEditTextDelegate;
@@ -40,6 +42,8 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
     //region Constants
     public static final String BOOK_INTENT_GET_NAME = "BOOK_INTENT_GET_NAME";
     public static final String BOOK_DATA_ID = "BOOK_DATA_ID";
+    public static final Integer BOOK_RESULT = 23;
+
     //endregion
 
     //region UI Properties
@@ -49,6 +53,7 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
     @InjectView(R.id.totalPagesEditTextView) PagesEditText pagesEditText;
     @InjectView(R.id.progessSeekBar) ProgessPagesSeekBar progessPagesSeekBar;
     @InjectView(R.id.progressTextView) TextView progressTextView;
+    @InjectView(R.id.coverButton) CoverButton coverButton;
     //endregion
 
     //region Properties
@@ -56,6 +61,7 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
     @Inject BookDataAccessObject bookDataAccessObject;
     @Inject AuthorDataAccessObject authorDataAccessObject;
     @Inject CategoryDataAccessObject categoryDataAccessObject;
+    @Inject NotificationPresenter notificationPresenter;
     private Book book;
     //endregion
 
@@ -67,7 +73,6 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
         Bundle editData = getIntent().getExtras();
         if (editData != null) {
             setBook((Book)bookDataAccessObject.findById(getIntent().getExtras().getLong(BOOK_DATA_ID)));
-
         }
         setActivityTitle();
 
@@ -94,6 +99,9 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
             authorEditText.setAuthor((Author)authorDataAccessObject.findById(data.getExtras().getLong(AuthorChooseActivity.AUTHOR_DATA_ID)));
         } else if (resultCode == CategoryChooseActivity.CATEGORY_RESULT) {
             categoryEditText.setCategory((Category)categoryDataAccessObject.findById(data.getExtras().getLong(CategoryChooseActivity.CATEGORY_DATA_ID)));
+        } else if (resultCode == CoverSearchActivity.COVER_RESULT) {
+            String filename = data.getExtras().getString(CoverSearchActivity.COVER_FILENAME_DATA_ID);
+            coverButton.setFilename(filename);
         }
     }
     //endregion
@@ -105,16 +113,14 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
     }
     public void setBook(Book book) {
         this.book = book;
+        coverButton.setFilename(book.getFilename());
         bookNameEditText.setText(book.getName());
         authorEditText.setAuthor(book.getAuthor());
         categoryEditText.setCategory(book.getCategory());
         pagesEditText.setPages(book.getPages());
         progessPagesSeekBar.setPages(book.getPages());
         progessPagesSeekBar.setPagesRead(book.getPagesRead());
-        if (book.getPages() > 0) {
-            double percentage = ((double)book.getPagesRead()/(double)book.getPages()) * 100;
-            progressTextView.setText(new Double(percentage).toString() + "%");
-        }
+        progressTextView.setText(book.getPagesRead().toString());
     }
     private void setActivityTitle() {
         Book possibleEditBook = (Book) getIntent().getSerializableExtra(BOOK_INTENT_GET_NAME);
@@ -140,18 +146,23 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
         progessPagesSeekBar.setPagesRead(0);
     }
     public void pagesProgressSeekBarChanged(Integer pagesRead) {
-        double percentage = ((double)pagesRead/(double)book.getPages()) * 100;
-        progressTextView.setText(new Double(percentage).toString() + "%");
+        progressTextView.setText(pagesRead.toString());
     }
     //endregion
 
     //region Actions
     public void onCoverClick(View view) {
-        Intent coverSearchIntent = new Intent(this, CoverSearchActivity.class);
-        startActivity(coverSearchIntent);
+        if (bookNameEditText.getText().toString().length() > 0 && authorEditText.getText().toString().length() > 0) {
+            Intent coverSearchIntent = new Intent(this, CoverSearchActivity.class);
+            coverSearchIntent.putExtra(CoverSearchActivity.COVER_QUERY_STRING, bookNameEditText.getText().toString() + " " + authorEditText.getText().toString());
+            startActivityForResult(coverSearchIntent, CoverSearchActivity.COVER_RESULT);
+        } else {
+            notificationPresenter.showError("Set the book name and author name!", getApplicationContext(), this);
+        }
     }
     public void onSaveClick(View view) {
         List<BookAddChainOfResponsibility> processors = new ArrayList<BookAddChainOfResponsibility>();
+        processors.add(coverButton);
         processors.add(bookNameEditText);
         processors.add(authorEditText);
         processors.add(categoryEditText);
@@ -160,9 +171,16 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
         try {
             for (BookAddChainOfResponsibility processor : processors) processor.processBook(getBook());
             getBook().saveBook();
+            setResult(BOOK_RESULT, getIntent());
+            finish();
         } catch (Exception e) {
-            NotificationShower.showError(e.getMessage(), getApplicationContext(), this);
+            notificationPresenter.showError(e.getMessage(), getApplicationContext(), this);
         }
+    }
+    public void onDeleteClick(View view) {
+        bookDataAccessObject.delete((SugarRecord)book);
+        setResult(BOOK_RESULT, getIntent());
+        finish();
     }
     //endregion
 

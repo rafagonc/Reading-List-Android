@@ -75,7 +75,7 @@ public class PagesEditText extends EditText implements BookAddChainOfResponsibil
     }
     public void setPages(Integer pages) {
         this.pages = pages;
-        setText(pages.toString());
+        if (pages != null) setText(pages.toString());
     }
     //endregion
 

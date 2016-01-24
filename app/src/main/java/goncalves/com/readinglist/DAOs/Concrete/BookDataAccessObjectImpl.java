@@ -1,15 +1,15 @@
 package goncalves.com.readinglist.DAOs.Concrete;
 
 import com.orm.SugarRecord;
-
 import java.util.List;
-
 import goncalves.com.readinglist.DAOs.Abstract.BookDataAccessObject;
 import goncalves.com.readinglist.Entities.Concrete.BookImpl;
 
 /**
  * Created by rafagonc on 1/5/16.
  */
+
+
 public class BookDataAccessObjectImpl implements BookDataAccessObject {
 
     @Override

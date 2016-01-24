@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="goncalves.com.readinglist" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +12,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Activities.BookListActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan">
             <intent-filter>
@@ -19,15 +22,16 @@
         </activity>
         <activity
             android:name=".Activities.BookAddActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_book_add" >
         </activity>
 
         <meta-data
             android:name="DATABASE"
-            android:value="reading_list.db" />
+            android:value="reading_list2.db" />
         <meta-data
             android:name="VERSION"
-            android:value="3" />
+            android:value="2" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -36,22 +40,26 @@
             android:value="goncalves.com.readinglist.Entities.Concrete" />
         <meta-data
             android:name="roboguice.modules"
-            android:value="goncalves.com.readinglist.Modules.DAODependencyInjection,goncalves.com.readinglist.Modules.FactoryDepedencyInjection" />
+            android:value="goncalves.com.readinglist.Modules.GeneralDepedencyInjection,goncalves.com.readinglist.Modules.DAODependencyInjection,goncalves.com.readinglist.Modules.FactoryDepedencyInjection,goncalves.com.readinglist.Modules.ServiceDepedencyInjection" />
 
         <activity
             android:name=".Activities.CategoryChooseActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_category_choose" >
         </activity>
         <activity
             android:name=".Activities.AuthorChooseActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_author_choose" >
         </activity>
         <activity
             android:name=".Activities.AuthorAddActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_author_add" >
         </activity>
         <activity
             android:name=".Activities.CoverSearchActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_cover_search" >
         </activity>
     </application>

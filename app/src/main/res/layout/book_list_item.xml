@@ -26,7 +26,9 @@
             android:text=""
             android:id="@+id/bookNameListItemTextView"
             android:layout_alignTop="@+id/bookCoverImageView"
+            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/bookCoverImageView"
             android:layout_toEndOf="@+id/bookCoverImageView" />
 
         <TextView
@@ -37,7 +39,9 @@
             android:layout_marginTop="15dp"
             android:id="@+id/bookProgressListItemTextView"
             android:layout_below="@+id/bookNameListItemTextView"
-            android:layout_alignEnd="@+id/bookNameListItemTextView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/bookCoverImageView"
             android:layout_toEndOf="@+id/bookCoverImageView" />
     </RelativeLayout>
 </RelativeLayout>

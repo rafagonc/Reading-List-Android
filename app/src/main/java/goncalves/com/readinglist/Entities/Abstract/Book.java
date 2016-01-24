@@ -1,7 +1,5 @@
 package goncalves.com.readinglist.Entities.Abstract;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by rafagonc on 1/5/16.
  */
@@ -9,8 +7,7 @@ public interface Book {
 
     //region Getters and
     public Long getId();
-    public Drawable getCoverImage();
-    public void setCoverImage(Drawable drawable);
+    public String getFilename();
     public String getName();
     public Author getAuthor();
     public Category getCategory();
@@ -21,6 +18,13 @@ public interface Book {
     public void setCategory(Category category);
     public void setPages(Integer pages);
     public void setPagesRead(Integer pagesRead);
+    public void setFilename(String filename);
+    public String getPercentage();
+
+    //endregion
+
+    //region Helpers
+    public Boolean hasPages();
     //endregion
 
     //region ORM

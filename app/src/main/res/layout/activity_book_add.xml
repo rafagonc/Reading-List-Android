@@ -15,10 +15,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
             android:id="@+id/add_book_main_layout">
 
-        <Button
+        <goncalves.com.readinglist.ViewAdapters.Concrete.CoverButton
             android:layout_width="80dp"
             android:background="@color/white"
             android:layout_height="match_parent"
@@ -110,10 +110,23 @@
         android:textSize="18sp"
         android:text="@string/create_button_name"
         android:layout_below="@+id/progessSeekBar"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
         android:background="@android:color/transparent"
         android:stateListAnimator="@null"
         android:onClick="onSaveClick"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteButton"
+            android:textColor="@color/red"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:text="@string/delete_name"
+            android:layout_below="@+id/progessSeekBar"
+            android:background="@android:color/transparent"
+            android:stateListAnimator="@null"
+            android:onClick="onDeleteClick"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -121,7 +134,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="0"
             android:id="@+id/progressTextView"
-            android:layout_toRightOf="@+id/saveButton"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignBaseline="@+id/textView"

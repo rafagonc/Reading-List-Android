@@ -56,6 +56,7 @@ public class AuthorChooseActivity extends RoboActionBarActivity implements Autho
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        authorListView.setAuthors((List<Author>)authorDataAccessObject.findAll());
 
     }
     //endregion
@@ -63,7 +64,7 @@ public class AuthorChooseActivity extends RoboActionBarActivity implements Autho
     //region Methods
     public void wantsToCreateNewAuthor() {
         Intent addAuthorIntent = new Intent(this, AuthorAddActivity.class);
-        startActivityForResult(addAuthorIntent, RESULT_OK);
+        startActivityForResult(addAuthorIntent, AuthorAddActivity.AUTHOR_ADD_RESULT);
     }
     //endregion
 
@@ -78,13 +79,3 @@ public class AuthorChooseActivity extends RoboActionBarActivity implements Autho
     //endregion
 
 }
-
-
-
-
-
-
-
-
-
-

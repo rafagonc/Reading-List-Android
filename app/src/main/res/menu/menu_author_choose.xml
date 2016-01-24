@@ -3,5 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="goncalves.com.readinglist.Activities.AuthorChooseActivity">
     <item android:id="@+id/actions_add" android:title="@string/action_add"
-        android:orderInCategory="100" app:showAsAction="always" android:icon="@drawable/ic_add_button" />
+        android:orderInCategory="100" app:showAsAction="always" />
 </menu>

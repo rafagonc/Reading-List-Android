@@ -1,7 +1,5 @@
 package goncalves.com.readinglist.Entities.Concrete;
 
-import android.graphics.drawable.Drawable;
-
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
@@ -25,7 +23,7 @@ public class BookImpl extends SugarRecord implements Book, Serializable {
     private Integer pagesRead;
     private AuthorImpl author;
     private CategoryImpl category;
-    private Drawable drawable;
+    private String filename;
     //endregion
 
     //region Constructors
@@ -65,17 +63,31 @@ public class BookImpl extends SugarRecord implements Book, Serializable {
     public void setCategory(Category category) {
         this.category = (CategoryImpl)category;
     }
-    public Drawable getCoverImage() {
-        return drawable;
+    public String getFilename() {
+        return filename;
     }
-    public void setCoverImage(Drawable drawable) {
-        this.drawable = drawable;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public String getPercentage() {
+        if (getPagesRead() != null && getPages() != null ){
+            double percentage = ((double)getPagesRead()/(double)getPages()) * 100;
+            return String.format("%.2f", percentage) + "%";
+        } else {
+            return "0.0%";
+        }
+    }
+    //endregion
+
+    //region Helpers
+    public Boolean hasPages() {
+        return getPages() != null;
     }
     //endregion
 

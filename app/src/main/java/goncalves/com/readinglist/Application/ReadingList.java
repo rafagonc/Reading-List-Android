@@ -1,10 +1,13 @@
 package goncalves.com.readinglist.Application;
 
 import android.app.Application;
+import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
 import com.orm.SugarContext;
 
-import goncalves.com.readinglist.Factories.Concrete.StaticDataFactoryImpl;
+import goncalves.com.readinglist.Factories.Entities.Concrete.StaticDataFactoryImpl;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by rafagonc on 1/7/16.
@@ -12,10 +15,13 @@ import goncalves.com.readinglist.Factories.Concrete.StaticDataFactoryImpl;
 public class ReadingList extends Application {
 
     StaticDataFactoryImpl staticDataFactory;
+    public static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
+        context = getApplicationContext();
         SugarContext.init(getApplicationContext());
         staticDataFactory = new StaticDataFactoryImpl();
         staticDataFactory.createStaticData(getApplicationContext());

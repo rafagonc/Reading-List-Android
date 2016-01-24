@@ -74,7 +74,7 @@ public class ProgessPagesSeekBar extends SeekBar implements BookAddChainOfRespon
     }
     public void setPages(Integer pages) {
         this.pages = pages;
-        setMax(pages);
+        if (pages != null) setMax(pages);
         setProgress(0);
     }
     //endregion
