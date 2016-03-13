@@ -22,4 +22,8 @@
     <string name="title_activity_author_add">AuthorAddActivity</string>
     <string name="title_activity_cover_search">CoverSearchActivity</string>
     <string name="github">App developed by Rafael Gonçalves. Source code: https://github.com/rafagonc/Reading-List-Android</string>
+    <string name="title_activity_main">MainActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

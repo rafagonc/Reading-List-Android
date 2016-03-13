@@ -43,7 +43,7 @@ public class BookListView extends ListView {
     }
     private void onConstruct() {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        addFooterView(layoutInflater.inflate(R.layout.book_list_footer, null));
+        addFooterView(layoutInflater.inflate(R.layout.book_list_footer, null), null, false);
         this.books = new ArrayList<>();
         this.bookListViewAdapter = new BookListViewAdapter(this.books, this.getContext());
         this.setAdapter(bookListViewAdapter);

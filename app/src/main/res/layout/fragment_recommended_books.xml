@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="goncalves.com.readinglist.Fragment.RecommendedBooksFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchTextField"
+            android:layout_gravity="left|top"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:hint="Search For Books"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/searchBookListView"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_below="@id/searchTextField"
+            android:layout_marginTop="8dp"/>
+
+        </RelativeLayout>
+
+</FrameLayout>
