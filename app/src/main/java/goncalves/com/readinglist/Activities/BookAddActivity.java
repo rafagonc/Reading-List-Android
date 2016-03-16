@@ -20,6 +20,7 @@ import goncalves.com.readinglist.DAOs.Abstract.CategoryDataAccessObject;
 import goncalves.com.readinglist.Entities.Abstract.Author;
 import goncalves.com.readinglist.Entities.Abstract.Book;
 import goncalves.com.readinglist.Entities.Abstract.Category;
+import goncalves.com.readinglist.Entities.Abstract.TransientBook;
 import goncalves.com.readinglist.Factories.Entities.Abstract.BookFactory;
 import goncalves.com.readinglist.GeneralClasses.NotificationPreseter.Abstract.NotificationPresenter;
 import goncalves.com.readinglist.Interfaces.BookAddChainOfResponsibility;
@@ -41,7 +42,8 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
 
     //region Constants
     public static final String BOOK_INTENT_GET_NAME = "BOOK_INTENT_GET_NAME";
-    public static final String BOOK_DATA_ID = "BOOK_DATA_ID";
+    public static final String BOOK_DATA_EDIT_ID = "BOOK_DATA_EDIT_ID";
+    public static final String TRANSIENT_BOOK_ADD_ID = "TRANSIENT_BOOK_ADD_ID";
     public static final Integer BOOK_RESULT = 23;
 
     //endregion
@@ -70,10 +72,22 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_add);
-        Bundle editData = getIntent().getExtras();
-        if (editData != null) {
-            setBook((Book)bookDataAccessObject.findById(getIntent().getExtras().getLong(BOOK_DATA_ID)));
+
+        //is edit existing book?
+        Long bookId = getIntent().getExtras().getLong(BOOK_DATA_EDIT_ID);
+        if (bookId != 0) {
+            setBook((Book)bookDataAccessObject.findById(bookId));
+
         }
+
+        //is adding transient?
+        TransientBook transientBook = (TransientBook)getIntent().getExtras().getSerializable(TRANSIENT_BOOK_ADD_ID);
+        if (transientBook != null) {
+            setTransientBook(transientBook);
+        }
+
+
+
         setActivityTitle();
 
         //set delegates
@@ -120,7 +134,10 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
         pagesEditText.setPages(book.getPages());
         progessPagesSeekBar.setPages(book.getPages());
         progessPagesSeekBar.setPagesRead(book.getPagesRead());
-        progressTextView.setText(book.getPagesRead().toString());
+        progressTextView.setText(book.getPagesRead() != null? book.getPagesRead().toString() : "");
+    }
+    public void setTransientBook(TransientBook transientBook) {
+        setBook(bookFactory.newBookFromTransientBook(transientBook, this));
     }
     private void setActivityTitle() {
         Book possibleEditBook = (Book) getIntent().getSerializableExtra(BOOK_INTENT_GET_NAME);

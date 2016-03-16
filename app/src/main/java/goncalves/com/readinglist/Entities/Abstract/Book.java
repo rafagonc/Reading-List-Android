@@ -3,17 +3,15 @@ package goncalves.com.readinglist.Entities.Abstract;
 /**
  * Created by rafagonc on 1/5/16.
  */
-public interface Book {
+public interface Book extends TransientBook {
 
     //region Getters and
     public Long getId();
     public String getFilename();
-    public String getName();
-    public Author getAuthor();
     public Category getCategory();
     public Integer getPages();
     public Integer getPagesRead();
-    public void setName(String name);
+    public Author getAuthor();
     public void setAuthor(Author author);
     public void setCategory(Category category);
     public void setPages(Integer pages);

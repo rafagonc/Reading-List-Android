@@ -71,7 +71,7 @@ public class CategoryNameEditText extends EditText implements BookAddChainOfResp
 
     public void setCategory(Category category) {
         this.category = category;
-        setText(category.getName());
+        if (category != null) setText(category.getName());
     }
     //endregion
 

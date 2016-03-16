@@ -3,7 +3,6 @@ package goncalves.com.readinglist.Entities.Concrete;
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
-import java.io.Serializable;
 import java.util.List;
 
 import goncalves.com.readinglist.Entities.Abstract.Category;
@@ -13,7 +12,7 @@ import goncalves.com.readinglist.Entities.Abstract.Category;
  */
 
 @Table
-public class CategoryImpl extends SugarRecord implements Category, Serializable {
+public class CategoryImpl extends SugarRecord implements Category {
 
     //region Properties
     private Long id;

@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 import java.util.List;
 
 import goncalves.com.readinglist.DAOs.Abstract.AuthorDataAccessObject;
+import goncalves.com.readinglist.Entities.Abstract.Author;
 import goncalves.com.readinglist.Entities.Concrete.AuthorImpl;
 
 /**
@@ -25,6 +26,13 @@ public class AuthorDataAccessObjectImpl implements AuthorDataAccessObject {
     @Override
     public List findAll() {
         return AuthorImpl.find(AuthorImpl.class, "");
+    }
+
+    @Override
+    public Author findByName(String name) {
+        List auhtors = AuthorImpl.find(AuthorImpl.class, "name LIKE  '" + name +"'");
+        Author author = auhtors.size() == 1 ? (Author) auhtors.get(0) : null;
+        return author;
     }
 
     @Override

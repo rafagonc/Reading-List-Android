@@ -12,7 +12,9 @@ import goncalves.com.readinglist.Factories.Entities.Concrete.CategoryFactoryImpl
 import goncalves.com.readinglist.Factories.Entities.Concrete.StaticDataFactoryImpl;
 import goncalves.com.readinglist.Factories.Fragment.Abstract.MainPagerFragmentFactory;
 import goncalves.com.readinglist.Factories.Fragment.Concrete.MainPagerFragmentFactoryImpl;
+import goncalves.com.readinglist.Factories.Response.Abstract.GoogleBooksResponseFactory;
 import goncalves.com.readinglist.Factories.Response.Abstract.GoogleCoverResponseFactory;
+import goncalves.com.readinglist.Factories.Response.Concrete.GoogleBooksResponseFactoryImpl;
 import goncalves.com.readinglist.Factories.Response.Concrete.GoogleCoverResponseFactoryImpl;
 import goncalves.com.readinglist.Factories.Server.Abstract.ServiceCallFactory;
 import goncalves.com.readinglist.Factories.Server.Concrete.ServiceCallFactoryImpl;
@@ -32,6 +34,7 @@ public class FactoryDepedencyInjection extends AbstractModule {
         bind(ServiceCallFactory.class).to(ServiceCallFactoryImpl.class);
         bind(GoogleCoverResponseFactory.class).to(GoogleCoverResponseFactoryImpl.class);
         bind(MainPagerFragmentFactory.class).to(MainPagerFragmentFactoryImpl.class);
+        bind(GoogleBooksResponseFactory.class).to(GoogleBooksResponseFactoryImpl.class);
     }
     //endregion
 

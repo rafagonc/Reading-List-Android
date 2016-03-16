@@ -67,7 +67,7 @@ public class ProgessPagesSeekBar extends SeekBar implements BookAddChainOfRespon
     }
     public void setPagesRead(Integer pagesRead) {
         this.pagesRead = pagesRead;
-        setProgress(pagesRead);
+        if (pagesRead != null) setProgress(pagesRead);
     }
     public Integer getPages() {
         return pages;

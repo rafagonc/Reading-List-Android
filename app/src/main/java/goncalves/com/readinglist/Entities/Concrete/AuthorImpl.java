@@ -3,8 +3,8 @@ package goncalves.com.readinglist.Entities.Concrete;
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
-import java.io.Serializable;
 import java.util.List;
+
 import goncalves.com.readinglist.Entities.Abstract.Author;
 
 /**
@@ -12,7 +12,7 @@ import goncalves.com.readinglist.Entities.Abstract.Author;
  */
 
 @Table
-public class AuthorImpl extends SugarRecord implements Author, Serializable {
+public class AuthorImpl extends SugarRecord implements Author {
 
     //region Properies
     private Long id;

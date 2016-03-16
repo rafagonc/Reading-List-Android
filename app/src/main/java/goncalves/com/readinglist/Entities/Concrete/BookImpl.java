@@ -1,9 +1,10 @@
 package goncalves.com.readinglist.Entities.Concrete;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+
 import com.orm.SugarRecord;
 import com.orm.dsl.Table;
-
-import java.io.Serializable;
 
 import goncalves.com.readinglist.Entities.Abstract.Author;
 import goncalves.com.readinglist.Entities.Abstract.Book;
@@ -14,7 +15,7 @@ import goncalves.com.readinglist.Entities.Abstract.Category;
  */
 
 @Table
-public class BookImpl extends SugarRecord implements Book, Serializable {
+public class BookImpl extends SugarRecord implements Book {
 
     //region Properties
     private Long id;
@@ -24,6 +25,9 @@ public class BookImpl extends SugarRecord implements Book, Serializable {
     private AuthorImpl author;
     private CategoryImpl category;
     private String filename;
+    private String snippet;
+    private String imageURL;
+    private String authorString;
     //endregion
 
     //region Constructors
@@ -82,6 +86,34 @@ public class BookImpl extends SugarRecord implements Book, Serializable {
         } else {
             return "0.0%";
         }
+    }
+    public String getSnippet() {
+        return snippet;
+    }
+    public void setSnippet(String snippet) {
+        this.snippet = snippet;
+    }
+    public String getImageURL() {
+        return imageURL;
+    }
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+    public String getAuthorString() {
+        return this.author.getName();
+    }
+    public void setAuthorString(String authorString) {
+    }
+    public void setBitmap(Bitmap bitmap) {
+
+    }
+    public Bitmap getBitmap() {
+        return null;
+    }
+
+    @Override
+    public String createFilenameForSavedCoverImage (Activity activity) throws IllegalStateException {
+        return null;
     }
     //endregion
 

@@ -55,7 +55,7 @@ public class BookListFragment extends RoboFragment implements BookListViewDelega
     public void wantsToOpenBookDetail(Book book) {
         Intent bookAddIntent = new Intent(getActivity(), BookAddActivity.class);
         Log.i("ID", book.getId().toString());
-        bookAddIntent.putExtra(BookAddActivity.BOOK_DATA_ID, book.getId());
+        bookAddIntent.putExtra(BookAddActivity.BOOK_DATA_EDIT_ID, book.getId());
         startActivityForResult(bookAddIntent, BookAddActivity.BOOK_RESULT);
     }
     //endregion
