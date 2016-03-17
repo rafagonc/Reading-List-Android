@@ -12,7 +12,15 @@ import goncalves.com.readinglist.Server.Requests.Abstract.ServiceRequest;
  */
 public class SearchBooksRequest implements ServiceRequest {
 
+    //region Properties
     private String query;
+    //endregion
+
+    //region Constructor
+    public SearchBooksRequest(String query) {
+        this.query = query;
+    }
+    //endregion
 
     //region Request
     @Override

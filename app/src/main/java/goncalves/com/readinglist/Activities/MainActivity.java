@@ -40,7 +40,6 @@ public class MainActivity extends RoboActionBarActivity implements android.suppo
             MainPageAdapter adapter = new MainPageAdapter(getSupportFragmentManager());
             adapter.setFragments(fragmentFactory.fragmentsForMainActivityPager());
             viewPager.setAdapter(adapter);
-
             TabWidgetCustomizer.customizeTab(this.tab);
         }
     }
@@ -89,6 +88,22 @@ public class MainActivity extends RoboActionBarActivity implements android.suppo
             tab.setTabListener(this);
             actionBar.addTab(tab);
         }
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                getSupportActionBar().setSelectedNavigationItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
     //endregion
+
 }

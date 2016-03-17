@@ -3,10 +3,13 @@ package goncalves.com.readinglist.Fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.inject.Inject;
 
@@ -24,7 +27,7 @@ import goncalves.com.readinglist.ViewAdapters.Delegates.TransientBookListViewDel
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
-public class RecommendedBooksFragment extends RoboFragment implements TransientBookListViewDelegate {
+public class RecommendedBooksFragment extends RoboFragment implements TransientBookListViewDelegate, TextView.OnEditorActionListener {
 
     //region UI
     @InjectView(R.id.searchTextField) EditText searchEditText;
@@ -40,17 +43,6 @@ public class RecommendedBooksFragment extends RoboFragment implements TransientB
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SearchBooksRequest request = new SearchBooksRequest();
-        request.setQuery("cleancode");
-        serviceProxy.callServiceWithRequest(request, new ServiceResponse() {
-            public void onSuccess(Object data) {
-                List<TransientBook> transientBookList = (List<TransientBook>)data;
-                searchBookListView.setBooks(transientBookList);
-            }
-            public void onFailure(String errorMessage) {
-                notificationPresenter.showError(errorMessage, getActivity().getApplicationContext(), getActivity());
-            }
-        });
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,11 +57,34 @@ public class RecommendedBooksFragment extends RoboFragment implements TransientB
     public void onResume() {
         super.onResume();
         searchBookListView.setDelegate(this);
+        searchEditText.setOnEditorActionListener(this);
     }
-
 //endregion
 
+    //region Service
+    private void callService() {
+        SearchBooksRequest request = new SearchBooksRequest(searchEditText.getText().toString());
+        serviceProxy.callServiceWithRequest(request, new ServiceResponse() {
+            public void onSuccess(Object data) {
+                SearchBooksRequest request = new SearchBooksRequest(searchEditText.getText().toString());
+                List<TransientBook> transientBookList = (List<TransientBook>)data;
+                searchBookListView.setBooks(transientBookList);
+            }
+            public void onFailure(String errorMessage) {
+                notificationPresenter.showError(errorMessage, getActivity().getApplicationContext(), getActivity());
+            }
+        });
+    }
+    //endregion
+
     //region Delegates
+
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (v.getText().length() > 9) callService();
+        }
+        return true;
+    }
 
     @Override
     public void transientListViewWantsToAddTransientBook(TransientBook transientBook) {

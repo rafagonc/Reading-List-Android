@@ -73,19 +73,20 @@ public class BookAddActivity extends RoboActionBarActivity implements AuthorName
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_add);
 
-        //is edit existing book?
-        Long bookId = getIntent().getExtras().getLong(BOOK_DATA_EDIT_ID);
-        if (bookId != 0) {
-            setBook((Book)bookDataAccessObject.findById(bookId));
+        if (getIntent().getExtras() != null) {
+            //is edit existing book?
+            Long bookId = getIntent().getExtras().getLong(BOOK_DATA_EDIT_ID);
+            if (bookId != 0) {
+                setBook((Book)bookDataAccessObject.findById(bookId));
 
+            }
+
+            //is adding transient?
+            TransientBook transientBook = (TransientBook)getIntent().getExtras().getSerializable(TRANSIENT_BOOK_ADD_ID);
+            if (transientBook != null) {
+                setTransientBook(transientBook);
+            }
         }
-
-        //is adding transient?
-        TransientBook transientBook = (TransientBook)getIntent().getExtras().getSerializable(TRANSIENT_BOOK_ADD_ID);
-        if (transientBook != null) {
-            setTransientBook(transientBook);
-        }
-
 
 
         setActivityTitle();
