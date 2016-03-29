@@ -1,6 +1,7 @@
 package goncalves.com.readinglist.Fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import java.util.List;
 import goncalves.com.readinglist.Activities.BookAddActivity;
 import goncalves.com.readinglist.Entities.Abstract.TransientBook;
 import goncalves.com.readinglist.GeneralClasses.NotificationPreseter.Abstract.NotificationPresenter;
+import goncalves.com.readinglist.GeneralClasses.ProgressPresenter.Abstract.ProgressPresenter;
 import goncalves.com.readinglist.R;
 import goncalves.com.readinglist.Server.Proxy.Abstract.ServiceProxy;
 import goncalves.com.readinglist.Server.Requests.Concrete.SearchBooksRequest;
@@ -37,6 +40,7 @@ public class RecommendedBooksFragment extends RoboFragment implements TransientB
     //region Properties
     @Inject ServiceProxy serviceProxy;
     @Inject NotificationPresenter notificationPresenter;
+    @Inject ProgressPresenter progressPresenter;
     //endregion
 
     //region Lifecycle
@@ -64,14 +68,18 @@ public class RecommendedBooksFragment extends RoboFragment implements TransientB
     //region Service
     private void callService() {
         SearchBooksRequest request = new SearchBooksRequest(searchEditText.getText().toString());
+        progressPresenter.showProgress("Searching...", getActivity());
         serviceProxy.callServiceWithRequest(request, new ServiceResponse() {
             public void onSuccess(Object data) {
+                progressPresenter.stop();
                 SearchBooksRequest request = new SearchBooksRequest(searchEditText.getText().toString());
-                List<TransientBook> transientBookList = (List<TransientBook>)data;
+                List<TransientBook> transientBookList = (List<TransientBook>) data;
                 searchBookListView.setBooks(transientBookList);
             }
+
             public void onFailure(String errorMessage) {
                 notificationPresenter.showError(errorMessage, getActivity().getApplicationContext(), getActivity());
+                progressPresenter.stop();
             }
         });
     }
@@ -81,7 +89,11 @@ public class RecommendedBooksFragment extends RoboFragment implements TransientB
 
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            if (v.getText().length() > 9) callService();
+            if (v.getText().length() > 1) {
+                callService();
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
         }
         return true;
     }

@@ -8,13 +8,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import goncalves.com.readinglist.Entities.Abstract.Book;
+import goncalves.com.readinglist.Entities.Abstract.Log;
+import goncalves.com.readinglist.Exceptions.InvalidPagesException;
 import goncalves.com.readinglist.Interfaces.BookAddChainOfResponsibility;
+import goncalves.com.readinglist.Interfaces.LogAddChainOfResponsibility;
 import goncalves.com.readinglist.ViewAdapters.Delegates.PagesEditTextDelegate;
 
 /**
  * Created by rafagonc on 1/6/16.
  */
-public class PagesEditText extends EditText implements BookAddChainOfResponsibility {
+public class PagesEditText extends EditText implements BookAddChainOfResponsibility, LogAddChainOfResponsibility {
 
     //region Properties
     private PagesEditTextDelegate delegate;
@@ -57,6 +60,15 @@ public class PagesEditText extends EditText implements BookAddChainOfResponsibil
             Integer pages = Integer.parseInt(this.getText().toString());
             book.setPages(pages);
         }
+    }
+    @Override
+    public void processLog(Log log) throws Exception {
+        if (this.getText().length() > 0) {
+            log.setPages(Integer.parseInt(getText().toString()));
+        } else {
+            throw new InvalidPagesException();
+        }
+
     }
     //endregion
 

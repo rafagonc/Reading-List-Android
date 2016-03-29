@@ -3,8 +3,26 @@
     android:layout_height="match_parent"
     tools:context="goncalves.com.readinglist.Fragment.UserFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/userInfoFragmentContainer">
+
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/logListFragmentContainer"
+            android:layout_below="@+id/userInfoFragmentContainer"></LinearLayout>
+
+
+    </RelativeLayout>
+
 
 </FrameLayout>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 
 import goncalves.com.readinglist.Entities.Abstract.Author;
@@ -25,9 +26,9 @@ public class BookImpl extends SugarRecord implements Book {
     private AuthorImpl author;
     private CategoryImpl category;
     private String filename;
-    private String snippet;
-    private String imageURL;
-    private String authorString;
+    @Ignore private String snippet;
+    @Ignore private String imageURL;
+    @Ignore private String authorString;
     //endregion
 
     //region Constructors

@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 import java.util.List;
 
 import goncalves.com.readinglist.DAOs.Abstract.CategoryDataAccessObject;
+import goncalves.com.readinglist.Entities.Abstract.Category;
 import goncalves.com.readinglist.Entities.Concrete.CategoryImpl;
 
 /**
@@ -37,4 +38,8 @@ public class CategoryDataAccessObjectImpl implements CategoryDataAccessObject {
         return CategoryImpl.count(CategoryImpl.class) > 0;
     }
 
+    @Override
+    public Category mostUsedCatgory() {
+        return null;
+    }
 }

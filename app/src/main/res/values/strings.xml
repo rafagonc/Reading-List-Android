@@ -18,12 +18,15 @@
     <string name="invalid_category_exception">You need to choose a category!</string>
     <string name="invalid_cover">You need to set the book name at least.</string>
     <string name="title_activity_category_choose">CategoryChooseActivity</string>
+    <string name="choose_book">Book</string>
     <string name="title_activity_author_choose">AuthorChooseActivity</string>
+    <string name="date">Date</string>
+    <string name="action_log">log</string>
     <string name="title_activity_author_add">AuthorAddActivity</string>
     <string name="title_activity_cover_search">CoverSearchActivity</string>
     <string name="github">App developed by Rafael Gonçalves. Source code: https://github.com/rafagonc/Reading-List-Android</string>
     <string name="title_activity_main">MainActivity</string>
-
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_log_add">Add Log</string>
+    <string name="title_activity_book_choose">Choose Book</string>
 </resources>

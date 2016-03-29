@@ -1,0 +1,1 @@
+alter table BOOK_IMPL add SNIPPET TEXT;

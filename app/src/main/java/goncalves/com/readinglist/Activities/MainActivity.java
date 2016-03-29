@@ -23,6 +23,7 @@ public class MainActivity extends RoboActionBarActivity implements android.suppo
 
     //region Properties
     @Inject MainPagerFragmentFactory fragmentFactory;
+    MainPageAdapter mainPageAdapter;
     //endregion
 
     //region UI
@@ -41,6 +42,7 @@ public class MainActivity extends RoboActionBarActivity implements android.suppo
             adapter.setFragments(fragmentFactory.fragmentsForMainActivityPager());
             viewPager.setAdapter(adapter);
             TabWidgetCustomizer.customizeTab(this.tab);
+            this.mainPageAdapter = adapter;
         }
     }
     @Override
@@ -60,6 +62,10 @@ public class MainActivity extends RoboActionBarActivity implements android.suppo
         if (item.getItemId() == R.id.actions_add) {
             Intent addBookIntent = new Intent(this, BookAddActivity.class);
             startActivityForResult(addBookIntent, BookAddActivity.BOOK_RESULT);
+        }
+        if (item.getItemId() == R.id.actions_log) {
+            Intent addBookIntent = new Intent(this, LogAddActivity.class);
+            startActivityForResult(addBookIntent, LogAddActivity.LOG_RESULT);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -91,11 +97,15 @@ public class MainActivity extends RoboActionBarActivity implements android.suppo
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
             public void onPageSelected(int position) {
                 getSupportActionBar().setSelectedNavigationItem(position);
+                for (android.support.v4.app.Fragment fragment : mainPageAdapter.getFragments()) {
+                    fragment.onResume();
+                }
             }
 
             @Override

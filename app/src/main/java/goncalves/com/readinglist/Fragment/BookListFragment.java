@@ -38,6 +38,11 @@ public class BookListFragment extends RoboFragment implements BookListViewDelega
         super.onAttach(activity);
         RoboGuice.getInjector(getActivity().getApplicationContext()).injectMembers(this);
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateData();
+    }
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.activity_book_list, container, false);
@@ -45,10 +50,15 @@ public class BookListFragment extends RoboFragment implements BookListViewDelega
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.bookListView.setBooks(bookDataAccessObject.findAll());
+        updateData();
         bookListView.setDelegate(this);
     }
     //endregion
+
+    //region Data
+    private void updateData() {
+        this.bookListView.setBooks(bookDataAccessObject.findAll());
+    }
 
     //region Delegates
     @Override

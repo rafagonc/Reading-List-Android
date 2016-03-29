@@ -10,5 +10,6 @@ import goncalves.com.readinglist.Entities.Abstract.Book;
 public interface BookDataAccessObject extends DataAccessObject {
 
     public List<Book> findAll();
+    public Book findByName(String name) throws IllegalStateException;
 
 }

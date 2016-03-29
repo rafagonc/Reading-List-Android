@@ -37,6 +37,9 @@ public class MainPageAdapter extends FragmentStatePagerAdapter {
         this.fragments = fragments;
         notifyDataSetChanged();
     }
+    public List<? extends Fragment> getFragments() {
+        return fragments;
+    }
     //endregion
 
 }

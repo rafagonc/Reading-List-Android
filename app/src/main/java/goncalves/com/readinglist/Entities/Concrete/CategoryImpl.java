@@ -37,6 +37,7 @@ public class CategoryImpl extends SugarRecord implements Category {
     public void setName(String name) {
         this.name = name;
     }
+
     //endregion
 
     //region Relationships
